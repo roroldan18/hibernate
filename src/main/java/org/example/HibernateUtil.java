@@ -17,7 +17,7 @@ public class HibernateUtil {
      */
     public static void buildSessionFactory() {
         Configuration configuration = new Configuration();
-        configuration.configure("/resources/hibernate.cfg.xml");
+        configuration.configure("hibernate.cfg.xml");
         // Se registran las clases que hay que mapear con cada tabla de la base de datos
         configuration.addAnnotatedClass(Contacto.class);
         configuration.addAnnotatedClass(UltimoEliminado.class);

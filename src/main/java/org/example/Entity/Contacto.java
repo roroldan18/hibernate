@@ -19,6 +19,8 @@ public class Contacto {
     @Column(name = "email")
     private String email;
 
+    public Contacto() {
+    }
 
     public Contacto(String nombre, String apellido, int telefono, String email) {
         this.nombre = nombre;
