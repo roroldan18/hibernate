@@ -1,6 +1,6 @@
 package org.example.View;
 
-import org.example.Controller.GestionBD;
+import org.example.Controller.GestionBDContactos;
 import org.example.Entity.Contacto;
 
 import java.util.Scanner;
@@ -63,8 +63,8 @@ public class Menu {
         String respuesta = sc.nextLine();
         if(respuesta.equals("S")){
             // Llamo al controller
-            GestionBD gestionBD = new GestionBD();
-            gestionBD.eliminarTodosLosDatos();
+            GestionBDContactos gestionBDContactos = new GestionBDContactos();
+            gestionBDContactos.eliminarTodosLosDatos();
         } else {
             System.out.println("No se eliminaron todos los datos del programa");
         }
@@ -76,8 +76,8 @@ public class Menu {
         String respuesta = sc.nextLine();
         if(respuesta.equals("S")){
             // Llamo al controller
-            GestionBD gestionBD = new GestionBD();
-            gestionBD.recuperarUltimoEliminado();
+            GestionBDContactos gestionBDContactos = new GestionBDContactos();
+            gestionBDContactos.recuperarUltimoEliminado();
         } else {
             System.out.println("No se recuperó el último contacto eliminado");
         }
@@ -89,8 +89,8 @@ public class Menu {
         char letra = sc.nextLine().charAt(0);
 
         // Llamo al controller
-        GestionBD gestionBD = new GestionBD();
-        gestionBD.filtrarContactosLetraNombre(letra);
+        GestionBDContactos gestionBDContactos = new GestionBDContactos();
+        gestionBDContactos.filtrarContactosLetraNombre(letra);
     }
 
     private static void mostrarEliminar() {
@@ -100,8 +100,8 @@ public class Menu {
             String respuesta = sc.nextLine();
             if(respuesta.equals("S")){
                 // Llamo al controller
-                GestionBD gestionBD = new GestionBD();
-                gestionBD.eliminarContacto(contacto);
+                GestionBDContactos gestionBDContactos = new GestionBDContactos();
+                gestionBDContactos.eliminarContacto(contacto);
             }
         }
     }
@@ -123,11 +123,11 @@ public class Menu {
             System.out.println("EL EMAIL NO SE PUEDE MODIFICAR");
 
             // Llamo al controller
-            GestionBD gestionBD = new GestionBD();
+            GestionBDContactos gestionBDContactos = new GestionBDContactos();
             contacto.setNombre(nombre);
             contacto.setApellido(apellido);
             contacto.setTelefono(telefono);
-            gestionBD.editarContacto(contacto);
+            gestionBDContactos.editarContacto(contacto);
         }
 
     }
@@ -138,8 +138,8 @@ public class Menu {
         String nombre = sc.nextLine();
 
         // Llamo al controller
-        GestionBD gestionBD = new GestionBD();
-        Contacto contacto = gestionBD.buscarContacto(nombre);
+        GestionBDContactos gestionBDContactos = new GestionBDContactos();
+        Contacto contacto = gestionBDContactos.buscarContacto(nombre);
         if(contacto != null){
             System.out.println("Contacto encontrado");
             System.out.println("Nombre: " + contacto.getNombre());
@@ -154,8 +154,8 @@ public class Menu {
     }
 
     private static void mostrarListar() {
-        GestionBD gestionBD = new GestionBD();
-        gestionBD.listarContactos();
+        GestionBDContactos gestionBDContactos = new GestionBDContactos();
+        gestionBDContactos.listarContactos();
     }
 
     public static void mostrarAgregar(){
@@ -170,8 +170,8 @@ public class Menu {
         String email = sc.nextLine();
 
         // Llamo al controller
-        GestionBD gestionBD = new GestionBD();
+        GestionBDContactos gestionBDContactos = new GestionBDContactos();
         Contacto contacto = new Contacto(nombre, apellido, telefono, email);
-        gestionBD.agregarContacto(contacto);
+        gestionBDContactos.agregarContacto(contacto);
     }
 }

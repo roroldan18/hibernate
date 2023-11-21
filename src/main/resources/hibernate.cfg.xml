@@ -13,5 +13,7 @@
 
         <mapping class="org.example.Entity.Contacto"/>
         <mapping class="org.example.Entity.UltimoEliminado"/>
+        <mapping class="org.example.Entity.Usuario"/>
+
     </session-factory>
 </hibernate-configuration>

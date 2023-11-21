@@ -2,17 +2,14 @@ package org.example.Controller;
 
 import org.example.Entity.Contacto;
 import org.example.Entity.UltimoEliminado;
+import org.example.Entity.Usuario;
 import org.example.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.List;
 
-public class GestionBD {
+public class GestionBDContactos {
     private Transaction transaction = null;
     private Session session = null;
     public boolean agregarContacto(Contacto contacto){
@@ -75,18 +72,14 @@ public class GestionBD {
             session = HibernateUtil.getCurrentSession();
             transaction = session.beginTransaction();
 
-            String hql = "FROM Contacto WHERE nombre = :nombre";
-            List<Contacto> contactos = session.createQuery(hql).setParameter("nombre", nombre).list();
+            String hql = "FROM Contacto WHERE nombre LIKE :nombre";
 
-            for (Contacto contacto: contactos){
-                System.out.println("ID: " + contacto.getId() + "\nNombre: " + contacto.getNombre() + "\nApellido: " + contacto.getApellido() + "\nEmail: " + contacto.getEmail() + "\nTeléfono: " + contacto.getTelefono());
-                System.out.println("--------------------------------------------------");
-            }
-            transaction.commit();
-
+            Contacto contacto = (Contacto) session.createQuery(hql)
+                    .setParameter("nombre", "%" + nombre + "%")
+                    .setMaxResults(1)  // Usa setMaxResults para limitar a un resultado
+                    .uniqueResult();
 
             transaction.commit();
-
             return contacto;
         } catch (Exception e) {
             if (transaction != null) {
@@ -95,10 +88,8 @@ public class GestionBD {
             System.out.println("Error al buscar contacto");
             e.printStackTrace();
             return null;
-        }finally {
-            if(session != null){
-                session.close();
-            }
+        } finally {
+            session.close();
         }
     }
 
@@ -158,7 +149,7 @@ public class GestionBD {
             session = HibernateUtil.getCurrentSession();
             transaction = session.beginTransaction();
 
-            String hql = "FROM UltimoEliminado ORDER BY fecha DESC";
+            String hql = "FROM UltimoEliminado ORDER BY fecha_eliminacion DESC";
             UltimoEliminado ultimoEliminado = (UltimoEliminado) session.createQuery(hql).setMaxResults(1).uniqueResult();
 
             if(ultimoEliminado != null){

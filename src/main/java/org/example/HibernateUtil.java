@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.Entity.Contacto;
 import org.example.Entity.UltimoEliminado;
+import org.example.Entity.Usuario;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -21,6 +22,7 @@ public class HibernateUtil {
         // Se registran las clases que hay que mapear con cada tabla de la base de datos
         configuration.addAnnotatedClass(Contacto.class);
         configuration.addAnnotatedClass(UltimoEliminado.class);
+        configuration.addAnnotatedClass(Usuario.class);
 
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
         sessionFactory = configuration.buildSessionFactory(serviceRegistry);
